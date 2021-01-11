@@ -52,17 +52,20 @@ public class FavoriteDbHelper extends SQLiteOpenHelper {
     }
 
     // Masukkan data ke database
-    public long AddFavorite(int id,
+    public long addFavorite(int id,
                             String team_name,
-                            //String team_year,
-                            //String team_desc,
+                            String team_year,
+                            String team_desc,
                             String team_badge) {
         SQLiteDatabase db;
         db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(KEY_ID, id);
         cv.put(ITEM_TEAM_NAME, team_name);
+        cv.put(ITEM_TEAM_YEAR, team_year);
+        cv.put(ITEM_TEAM_DESC, team_desc);
         cv.put(ITEM_TEAM_BADGE, team_badge);
+
 
         long insert = db.insert(TABLE_NAME, null, cv);
 
@@ -70,16 +73,14 @@ public class FavoriteDbHelper extends SQLiteOpenHelper {
     }
 
     // Menghapus baris dari database
-    public ArrayList<Favorite> removeFav(int id) {
-        ArrayList<Favorite> userModeArrayList = new ArrayList<Favorite>();
+    public void delFavorite(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, KEY_ID + " = ?",
                 new String[]{String.valueOf(id)});
-        return userModeArrayList;
     }
 
     // Pilih semua favorite list
-    public ArrayList<Favorite> allFavorite() {
+    public ArrayList<Favorite> getFavorite() {
         ArrayList<Favorite> userModeArrayList = new ArrayList<Favorite>();
 
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
@@ -91,12 +92,26 @@ public class FavoriteDbHelper extends SQLiteOpenHelper {
                 Favorite favorite = new Favorite();
                 favorite.setId(c.getInt(c.getColumnIndex(KEY_ID)));
                 favorite.setTeam_name(c.getString(c.getColumnIndex(ITEM_TEAM_NAME)));
+                favorite.setTeam_year(c.getString(c.getColumnIndex(ITEM_TEAM_YEAR)));
+                favorite.setTeam_desc(c.getString(c.getColumnIndex(ITEM_TEAM_DESC)));
                 favorite.setTeam_badge(c.getString(c.getColumnIndex(ITEM_TEAM_BADGE)));
 
                 userModeArrayList.add(favorite);
                 } while (c.moveToNext());
             }
         return userModeArrayList;
+    }
+
+    public boolean isFavorite(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ID + " = ?";
+        Cursor cursor = db.rawQuery(selectQuery, new String[] {String.valueOf(id)});
+
+        if (cursor.getCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

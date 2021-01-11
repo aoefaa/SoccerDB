@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.pemsel.aoefaa.soccerdb.R;
 import com.pemsel.aoefaa.soccerdb.activity.DetailActivity;
+import com.pemsel.aoefaa.soccerdb.activity.DetailFavoriteActivity;
 import com.pemsel.aoefaa.soccerdb.data.Favorite;
 import com.pemsel.aoefaa.soccerdb.data.Team;
 import com.pemsel.aoefaa.soccerdb.db.FavoriteDbHelper;
@@ -29,7 +30,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     private ArrayList<Favorite> favoriteList = new ArrayList<>();
     private Activity activity;
     private FavoriteDbHelper favoriteDbHelper;
-    private ArrayList<Team> team = new ArrayList<>();
+    private ArrayList<Team> team;
 
     public FavoriteAdapter(Activity activity) {
         this.activity = activity;
@@ -43,6 +44,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     public void setFavoriteList(ArrayList<Favorite> list) {
         if (list.size() > 0) {
             this.favoriteList.clear();
+            this.favoriteList = favoriteList;
         }
 
         this.favoriteList.addAll(list);
@@ -63,8 +65,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     public void onBindViewHolder(@NonNull FavoriteViewHolder holder, int position) {
         holder.bind(favoriteList.get(position));
         holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), DetailActivity.class);
-            intent.putExtra("detail", team.get(position));
+            Intent intent = new Intent(view.getContext(), DetailFavoriteActivity.class);
+            intent.putExtra("detail", favoriteList.get(position));
             view.getContext().startActivity(intent);
         });
 

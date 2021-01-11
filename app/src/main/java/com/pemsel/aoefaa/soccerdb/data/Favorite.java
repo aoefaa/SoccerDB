@@ -6,11 +6,13 @@ import android.os.Parcelable;
 public class Favorite implements Parcelable {
 
     int id;
-    private String team_name, team_badge;
+    private String team_name, team_year, team_desc, team_badge;
 
     public Favorite(Parcel in) {
         id = in.readInt();
         team_name = in.readString();
+        team_year = in.readString();
+        team_desc = in.readString();
         team_badge = in.readString();
     }
 
@@ -63,6 +65,24 @@ public class Favorite implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(team_name);
+        dest.writeString(team_year);
+        dest.writeString(team_desc);
         dest.writeString(team_badge);
+    }
+
+    public String getTeam_year() {
+        return team_year;
+    }
+
+    public void setTeam_year(String team_year) {
+        this.team_year = team_year;
+    }
+
+    public String getTeam_desc() {
+        return team_desc;
+    }
+
+    public void setTeam_desc(String team_desc) {
+        this.team_desc = team_desc;
     }
 }

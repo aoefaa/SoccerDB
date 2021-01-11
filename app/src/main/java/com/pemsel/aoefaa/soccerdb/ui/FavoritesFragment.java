@@ -14,13 +14,10 @@ import android.view.ViewGroup;
 
 import com.pemsel.aoefaa.soccerdb.R;
 import com.pemsel.aoefaa.soccerdb.adapter.FavoriteAdapter;
-import com.pemsel.aoefaa.soccerdb.adapter.TeamAdapter;
 import com.pemsel.aoefaa.soccerdb.data.Favorite;
-import com.pemsel.aoefaa.soccerdb.data.Team;
 import com.pemsel.aoefaa.soccerdb.db.FavoriteDbHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FavoritesFragment extends Fragment{
 
@@ -36,7 +33,6 @@ public class FavoritesFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().setTitle("Favorites");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_favorites, container, false);
     }
@@ -49,7 +45,7 @@ public class FavoritesFragment extends Fragment{
         favoriteAdapter = new FavoriteAdapter(getActivity());
         favoriteDbHelper = new FavoriteDbHelper(getContext());
 
-        favoriteList = favoriteDbHelper.allFavorite();
+        favoriteList = favoriteDbHelper.getFavorite();
         favoriteAdapter.setFavoriteList(favoriteList);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

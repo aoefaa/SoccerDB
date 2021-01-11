@@ -1,11 +1,10 @@
 package com.pemsel.aoefaa.soccerdb.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.os.PersistableBundle;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -34,9 +33,9 @@ public class DetailActivity extends AppCompatActivity {
     private Team team = new Team();
     private boolean isFavorite = false;
     private FavoriteAdapter favoriteAdapter;
-    private ArrayList<Favorite> favoriteList = new ArrayList<>();
+    private ArrayList<Favorite> favoriteList;
+    private Favorite favorite = new Favorite();
     ProgressBar progressBar;
-    Favorite favorite;
     int IdTeam;
     String NameTeam;
     String YearTeam;
@@ -49,7 +48,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         favoriteDbHelper = new FavoriteDbHelper(this);
-        favoriteList = favoriteDbHelper.allFavorite();
+        favoriteList = favoriteDbHelper.getFavorite();
 
         TextView tvNama = findViewById(R.id.tvNama);
         TextView tvTahun = findViewById(R.id.tvTahun);
@@ -69,19 +68,24 @@ public class DetailActivity extends AppCompatActivity {
                     if (teams != null && teams.getTeams() != null) {
                         team = teams.getTeams().get(0);
                         tvNama.setText(team.getStrTeam());
+                        //tvNama.setText(favorite.getTeam_name());
                         tvDeskripsi.setText(team.getStrDescriptionEN());
+                        //tvDeskripsi.setText(favorite.getTeam_desc());
                         tvTahun.setText(team.getIntFormedYear());
+                        //tvTahun.setText(favorite.getTeam_year());
                         Glide.with(getApplicationContext())
                                 .load(team.getStrTeamBadge())
                                 .apply(new RequestOptions())
                                 .into(imgTeam);
 
-                        for (int i = 0; i < favoriteList.size(); i++) {
-                            if (favoriteList.get(i).getTeam_name().equals(team.getStrTeam())) {
-                                btFav.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                        //Glide.with(getApplicationContext()).load(favorite.getTeam_badge()).apply(new RequestOptions()).into(imgTeam);
+
+                        for (int i=0;i<favoriteList.size();i++){
+                            if (favoriteList.get(i).getTeam_name().equals(team.getStrTeam())){
+                                btFav.setFavorite(true);
                             }
                         }
-                        //progressBar.setVisibility(View.GONE);
+
                     }
 
                 }
@@ -93,33 +97,6 @@ public class DetailActivity extends AppCompatActivity {
                 System.out.println(t.getMessage());
             }
         });
-
-        /*btFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (team.getStrTeam().isEmpty()){
-                    Toast.makeText(DetailActivity.this,"Error: Nama Team Null!",Toast.LENGTH_LONG).show();
-                } else if(team.getStrTeamBadge().isEmpty()){
-                    Toast.makeText(DetailActivity.this,"Error: Foto Team Null!",Toast.LENGTH_LONG).show();
-                } else{
-                    int status = 0;
-                    for(int i=0;i<favoriteList.size();i++){
-                        if(favoriteList.get(i).getTeam_name().equals(team.getStrTeam())){
-                            status=1;
-                        }
-                    }
-                    if (status==1){
-                        favoriteDbHelper.removeFav(favoriteList.get().getId());
-                        btFav.setBackgroundResource(R.drawable.ic_baseline_shadow_24);
-                        Toast.makeText(DetailActivity.this,"Removed", Toast.LENGTH_LONG).show();
-                    } else {
-                        favoriteDbHelper.AddFavorite(team.getStrTeam(), team.getStrTeamBadge());
-                        btFav.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
-                        Toast.makeText(DetailActivity.this,"Added",Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-        });*/
 
         btFav.setOnFavoriteChangeListener(
                 new MaterialFavoriteButton.OnFavoriteChangeListener() {
@@ -133,13 +110,15 @@ public class DetailActivity extends AppCompatActivity {
                             DescTeam = team.getStrDescriptionEN();
                             BadgeTeam = team.getStrTeamBadge();
 
-                            favoriteDbHelper.AddFavorite(IdTeam ,NameTeam, BadgeTeam);
-                            Toast.makeText(DetailActivity.this,"Added",Toast.LENGTH_LONG).show();
+                            favoriteDbHelper.addFavorite(IdTeam, NameTeam, YearTeam, DescTeam, BadgeTeam);
+                            Toast.makeText(DetailActivity.this, "Added", Toast.LENGTH_LONG).show();
                         } else {
-                            favoriteDbHelper.removeFav(IdTeam);
-                            Toast.makeText(DetailActivity.this,"Removed",Toast.LENGTH_LONG).show();
+                            favoriteDbHelper.delFavorite(IdTeam);
+                            Toast.makeText(DetailActivity.this, "Removed", Toast.LENGTH_LONG).show();
                         }
-                    }
+
+                        }
+
                 }
         );
     }
