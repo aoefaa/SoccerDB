@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Team implements Parcelable {
     @SerializedName("idTeam")
-    private String idTeam;
+    private int idTeam;
     @SerializedName("strTeam")
     private String strTeam;
     @SerializedName("intFormedYear")
@@ -20,42 +20,10 @@ public class Team implements Parcelable {
     private String strTeamBadge;
     private String favStatus;
 
-    public void setIdTeam(String idTeam) {
-        this.idTeam = idTeam;
-    }
-
-    public void setStrTeam(String strTeam) {
-        this.strTeam = strTeam;
-    }
-
-    public void setIntFormedYear(String intFormedYear) {
-        this.intFormedYear = intFormedYear;
-    }
-
-    public void setStrStadium(String strStadium) {
-        this.strStadium = strStadium;
-    }
-
-    public void setStrDescriptionEN(String strDescriptionEN) {
-        this.strDescriptionEN = strDescriptionEN;
-    }
-
-    public void setStrTeamBadge(String strTeamBadge) {
-        this.strTeamBadge = strTeamBadge;
-    }
-
-    public String getFavStatus() {
-        return favStatus;
-    }
-
-    public void setFavStatus(String favStatus) {
-        this.favStatus = favStatus;
-    }
-
     public Team() {
     }
 
-    public Team(String idTeam, String strTeam, String intFormedYear, String strStadium, String strDescriptionEN, String strTeamBadge, String favStatus) {
+    public Team(int idTeam, String strTeam, String intFormedYear, String strStadium, String strDescriptionEN, String strTeamBadge, String favStatus) {
         this.idTeam = idTeam;
         this.strTeam = strTeam;
         this.intFormedYear = intFormedYear;
@@ -65,7 +33,7 @@ public class Team implements Parcelable {
         this.favStatus = favStatus;
     }
 
-    public String getIdTeam() {
+    public int getIdTeam() {
         return idTeam;
     }
 
@@ -75,10 +43,6 @@ public class Team implements Parcelable {
 
     public String getIntFormedYear() {
         return intFormedYear;
-    }
-
-    public String getStrStadium() {
-        return strStadium;
     }
 
     public String getStrDescriptionEN() {
@@ -96,19 +60,17 @@ public class Team implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.idTeam);
+        dest.writeInt(this.idTeam);
         dest.writeString(this.strTeam);
         dest.writeString(this.intFormedYear);
-        dest.writeString(this.strStadium);
         dest.writeString(this.strDescriptionEN);
         dest.writeString(this.strTeamBadge);
     }
 
     protected Team(Parcel in) {
-        this.idTeam = in.readString();
+        this.idTeam = in.readInt();
         this.strTeam = in.readString();
         this.intFormedYear = in.readString();
-        this.strStadium = in.readString();
         this.strDescriptionEN = in.readString();
         this.strTeamBadge = in.readString();
     }

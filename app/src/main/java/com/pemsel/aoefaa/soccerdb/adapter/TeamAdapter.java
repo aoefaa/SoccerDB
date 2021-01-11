@@ -2,13 +2,9 @@ package com.pemsel.aoefaa.soccerdb.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,61 +16,51 @@ import com.bumptech.glide.request.RequestOptions;
 import com.pemsel.aoefaa.soccerdb.R;
 import com.pemsel.aoefaa.soccerdb.activity.DetailActivity;
 import com.pemsel.aoefaa.soccerdb.data.Team;
-import com.pemsel.aoefaa.soccerdb.db.FavoriteDbHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
-    private Team team;
-    private Context context;
-    private FavoriteDbHelper favoriteDbHelper;
 
-    private List<Team> teams = new ArrayList<>();
+    private List<Team> items = new ArrayList<>();
+
+    public interface onSelectData {
+        void onSelected(Team team);
+    }
 
     public void setData (List<Team> teams){
-        this.context = context;
-        this.teams.clear();
-        this.teams = teams;
+        this.items.clear();
+        this.items = teams;
         notifyDataSetChanged();
     }
 
-    @NonNull
     @Override
-    public TeamAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TeamAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.item_teams, parent, false);
         return new ViewHolder(view);
     }
 
-    private void createTableOnFirstStart() {
-
-        SharedPreferences prefs = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("firstStart", false);
-        editor.apply();
-    }
-
     @Override
     public void onBindViewHolder(@NonNull TeamAdapter.ViewHolder holder, int position) {
-        holder.bind(teams.get(position));
+        holder.bind(items.get(position));
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), DetailActivity.class);
-            intent.putExtra("detail", teams.get(position));
+            intent.putExtra("detail", items.get(position));
             view.getContext().startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return teams.size();
+        return items.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         private ImageView imgTeam;
-        private TextView tvNama, tvDesc, tvTahun;
-        Button btFav;
+        private TextView tvNama;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -91,4 +77,5 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
                     .into(imgTeam);
         }
     }
+
 }

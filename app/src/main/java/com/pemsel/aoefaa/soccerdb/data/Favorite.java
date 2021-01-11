@@ -1,36 +1,40 @@
 package com.pemsel.aoefaa.soccerdb.data;
 
-public class Favorite {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private String id;
-    private String team_name;
-    private String team_year;
-    private String team_desc;
-    private int team_badge;
-    private String fav_status;
+public class Favorite implements Parcelable {
+
+    int id;
+    private String team_name, team_badge;
+
+    public Favorite(Parcel in) {
+        id = in.readInt();
+        team_name = in.readString();
+        team_badge = in.readString();
+    }
+
+    public static final Creator<Favorite> CREATOR = new Creator<Favorite>() {
+        @Override
+        public Favorite createFromParcel(Parcel in) {
+            return new Favorite(in);
+        }
+
+        @Override
+        public Favorite[] newArray(int size) {
+            return new Favorite[size];
+        }
+    };
 
     public Favorite() {
+
     }
 
-    public Favorite(String id,
-                    String team_name,
-                    String team_year,
-                    String team_desc,
-                    int team_badge,
-                    String fav_status) {
-        this.id = id;
-        this.team_name = team_name;
-        this.team_year = team_year;
-        this.team_desc = team_desc;
-        this.team_badge = team_badge;
-        this.fav_status = fav_status;
-    }
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -42,35 +46,23 @@ public class Favorite {
         this.team_name = team_name;
     }
 
-    public String getTeam_year() {
-        return team_year;
-    }
-
-    public void setTeam_year(String team_year) {
-        this.team_year = team_year;
-    }
-
-    public String getTeam_desc() {
-        return team_desc;
-    }
-
-    public void setTeam_desc(String team_desc) {
-        this.team_desc = team_desc;
-    }
-
-    public int getTeam_badge() {
+    public String getTeam_badge() {
         return team_badge;
     }
 
-    public void setTeam_badge(int team_badge) {
+    public void setTeam_badge(String team_badge) {
         this.team_badge = team_badge;
     }
 
-    public String getFav_status() {
-        return fav_status;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setFav_status(String fav_status) {
-        this.fav_status = fav_status;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(team_name);
+        dest.writeString(team_badge);
     }
 }
