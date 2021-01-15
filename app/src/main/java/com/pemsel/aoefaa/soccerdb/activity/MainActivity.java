@@ -3,25 +3,15 @@ package com.pemsel.aoefaa.soccerdb.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.pemsel.aoefaa.soccerdb.R;
-import com.pemsel.aoefaa.soccerdb.adapter.TeamAdapter;
-import com.pemsel.aoefaa.soccerdb.data.Teams;
-import com.pemsel.aoefaa.soccerdb.network.ApiClient;
-import com.pemsel.aoefaa.soccerdb.network.ApiInterface;
 import com.pemsel.aoefaa.soccerdb.ui.FavoritesFragment;
 import com.pemsel.aoefaa.soccerdb.ui.MatchesFragment;
 import com.pemsel.aoefaa.soccerdb.ui.TeamsFragment;
-
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -61,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 fragment = new MatchesFragment();
                 break;
 
-            case R.id.nav_teams:
+            case R.id.nav_home:
                 fragment = new TeamsFragment();
                 break;
         }

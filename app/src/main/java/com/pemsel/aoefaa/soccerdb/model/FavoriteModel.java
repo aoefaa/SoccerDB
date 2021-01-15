@@ -1,14 +1,14 @@
-package com.pemsel.aoefaa.soccerdb.data;
+package com.pemsel.aoefaa.soccerdb.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Favorite implements Parcelable {
+public class FavoriteModel implements Parcelable {
 
     int id;
     private String team_name, team_year, team_desc, team_badge;
 
-    public Favorite(Parcel in) {
+    public FavoriteModel(Parcel in) {
         id = in.readInt();
         team_name = in.readString();
         team_year = in.readString();
@@ -16,19 +16,19 @@ public class Favorite implements Parcelable {
         team_badge = in.readString();
     }
 
-    public static final Creator<Favorite> CREATOR = new Creator<Favorite>() {
+    public static final Creator<FavoriteModel> CREATOR = new Creator<FavoriteModel>() {
         @Override
-        public Favorite createFromParcel(Parcel in) {
-            return new Favorite(in);
+        public FavoriteModel createFromParcel(Parcel in) {
+            return new FavoriteModel(in);
         }
 
         @Override
-        public Favorite[] newArray(int size) {
-            return new Favorite[size];
+        public FavoriteModel[] newArray(int size) {
+            return new FavoriteModel[size];
         }
     };
 
-    public Favorite() {
+    public FavoriteModel() {
 
     }
 

@@ -3,16 +3,16 @@
 
     <item
         android:id="@+id/nav_matches"
-        android:icon="@drawable/ic_baseline_home_24"
+        android:icon="@drawable/match_fragment_button"
         android:title="Matches"/>
 
     <item
-        android:id="@+id/nav_teams"
-        android:icon="@drawable/ic_baseline_sports_soccer_24"
+        android:id="@+id/nav_home"
+        android:icon="@drawable/home_fragment_button"
         android:title="Teams"/>
 
     <item
         android:id="@+id/nav_favorites"
-        android:icon="@drawable/ic_favorite_black_24dp"
+        android:icon="@drawable/favorite_fragment_button"
         android:title="Favorites"/>
 </menu>

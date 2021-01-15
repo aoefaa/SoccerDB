@@ -1,6 +1,6 @@
 package com.pemsel.aoefaa.soccerdb.network;
 
-import com.pemsel.aoefaa.soccerdb.data.Teams;
+import com.pemsel.aoefaa.soccerdb.model.Teams;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

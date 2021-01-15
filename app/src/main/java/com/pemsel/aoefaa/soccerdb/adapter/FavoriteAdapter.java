@@ -1,7 +1,6 @@
 package com.pemsel.aoefaa.soccerdb.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,44 +9,41 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.pemsel.aoefaa.soccerdb.R;
-import com.pemsel.aoefaa.soccerdb.activity.DetailActivity;
 import com.pemsel.aoefaa.soccerdb.activity.DetailFavoriteActivity;
-import com.pemsel.aoefaa.soccerdb.data.Favorite;
-import com.pemsel.aoefaa.soccerdb.data.Team;
-import com.pemsel.aoefaa.soccerdb.db.FavoriteDbHelper;
+import com.pemsel.aoefaa.soccerdb.model.FavoriteModel;
+import com.pemsel.aoefaa.soccerdb.model.TeamModel;
+import com.pemsel.aoefaa.soccerdb.db.DBHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> {
 
-    private ArrayList<Favorite> favoriteList = new ArrayList<>();
+    private ArrayList<FavoriteModel> favoriteModelList = new ArrayList<>();
     private Activity activity;
-    private FavoriteDbHelper favoriteDbHelper;
-    private ArrayList<Team> team;
+    private DBHelper DBHelper;
+    private ArrayList<TeamModel> teamModel;
 
     public FavoriteAdapter(Activity activity) {
         this.activity = activity;
-        favoriteDbHelper = new FavoriteDbHelper(activity);
+        DBHelper = new DBHelper(activity);
     }
 
-    public ArrayList<Favorite> getFavoriteList() {
-        return favoriteList;
+    public ArrayList<FavoriteModel> getFavoriteModelList() {
+        return favoriteModelList;
     }
 
-    public void setFavoriteList(ArrayList<Favorite> list) {
+    public void setFavoriteModelList(ArrayList<FavoriteModel> list) {
         if (list.size() > 0) {
-            this.favoriteList.clear();
-            this.favoriteList = favoriteList;
+            this.favoriteModelList.clear();
+            this.favoriteModelList = favoriteModelList;
         }
 
-        this.favoriteList.addAll(list);
+        this.favoriteModelList.addAll(list);
         notifyDataSetChanged();
     }
 
@@ -63,10 +59,10 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
 
     @Override
     public void onBindViewHolder(@NonNull FavoriteViewHolder holder, int position) {
-        holder.bind(favoriteList.get(position));
+        holder.bind(favoriteModelList.get(position));
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), DetailFavoriteActivity.class);
-            intent.putExtra("detail", favoriteList.get(position));
+            intent.putExtra("detail", favoriteModelList.get(position));
             view.getContext().startActivity(intent);
         });
 
@@ -74,7 +70,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
 
     @Override
     public int getItemCount() {
-        return favoriteList.size();
+        return favoriteModelList.size();
     }
 
     public class FavoriteViewHolder extends RecyclerView.ViewHolder {
@@ -90,10 +86,10 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
 
         }
 
-        public void bind(Favorite favoriteList) {
-            tvFav.setText(favoriteList.getTeam_name());
+        public void bind(FavoriteModel favoriteModelList) {
+            tvFav.setText(favoriteModelList.getTeam_name());
             Glide.with(itemView.getContext())
-                    .load(favoriteList.getTeam_badge())
+                    .load(favoriteModelList.getTeam_badge())
                     .apply(new RequestOptions())
                     .into(ivFav);
         }

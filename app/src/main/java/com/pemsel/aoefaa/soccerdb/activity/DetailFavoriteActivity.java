@@ -12,26 +12,19 @@ import com.bumptech.glide.request.RequestOptions;
 import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 import com.pemsel.aoefaa.soccerdb.R;
 import com.pemsel.aoefaa.soccerdb.adapter.FavoriteAdapter;
-import com.pemsel.aoefaa.soccerdb.data.Favorite;
-import com.pemsel.aoefaa.soccerdb.data.Team;
-import com.pemsel.aoefaa.soccerdb.data.Teams;
-import com.pemsel.aoefaa.soccerdb.db.FavoriteDbHelper;
-import com.pemsel.aoefaa.soccerdb.network.ApiClient;
-import com.pemsel.aoefaa.soccerdb.network.ApiInterface;
+import com.pemsel.aoefaa.soccerdb.model.FavoriteModel;
+import com.pemsel.aoefaa.soccerdb.model.TeamModel;
+import com.pemsel.aoefaa.soccerdb.db.DBHelper;
 
 import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class DetailFavoriteActivity extends AppCompatActivity {
-    private FavoriteDbHelper favoriteDbHelper;
-    private Favorite favorite = new Favorite();
-    private Team team = new Team();
+    private DBHelper DBHelper;
+    private FavoriteModel favoriteModel = new FavoriteModel();
+    private TeamModel teamModel = new TeamModel();
     private FavoriteAdapter favoriteAdapter;
-    private ArrayList<Favorite> favoriteList;
-    private ArrayList<Team> teamList;
+    private ArrayList<FavoriteModel> favoriteModelList;
+    private ArrayList<TeamModel> teamModelList;
     int IdTeam;
     String NameTeam;
     String YearTeam;
@@ -43,8 +36,8 @@ public class DetailFavoriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        favoriteDbHelper = new FavoriteDbHelper(this);
-        favoriteList = favoriteDbHelper.getFavorite();
+        DBHelper = new DBHelper(this);
+        favoriteModelList = DBHelper.getFavorite();
 
         TextView tvNama = findViewById(R.id.tvNama);
         TextView tvTahun = findViewById(R.id.tvTahun);
@@ -52,25 +45,25 @@ public class DetailFavoriteActivity extends AppCompatActivity {
         ImageView imgTeam = findViewById(R.id.imgTeam);
         MaterialFavoriteButton btFav = findViewById(R.id.btFav);
 
-        favorite = getIntent().getParcelableExtra("detail");
+        favoriteModel = getIntent().getParcelableExtra("detail");
 
-        if (favorite != null) {
-            IdTeam = favorite.getId();
-            NameTeam = favorite.getTeam_name();
-            YearTeam = favorite.getTeam_year();
-            DescTeam = favorite.getTeam_desc();
+        if (favoriteModel != null) {
+            IdTeam = favoriteModel.getId();
+            NameTeam = favoriteModel.getTeam_name();
+            YearTeam = favoriteModel.getTeam_year();
+            DescTeam = favoriteModel.getTeam_desc();
 
             tvNama.setText(NameTeam);
             tvTahun.setText(YearTeam);
             tvDeskripsi.setText(DescTeam);
 
             Glide.with(getApplicationContext())
-                    .load(favorite.getTeam_badge())
+                    .load(favoriteModel.getTeam_badge())
                     .apply(new RequestOptions())
                     .into(imgTeam);
 
-            for (int i=0;i<favoriteList.size();i++){
-                if (favoriteList.get(i).getTeam_name().equals(favoriteList.get(i).getTeam_name())){
+            for (int i = 0; i< favoriteModelList.size(); i++){
+                if (favoriteModelList.get(i).getTeam_name().equals(favoriteModelList.get(i).getTeam_name())){
                     btFav.setFavorite(true);
                 }
             }
@@ -82,25 +75,22 @@ public class DetailFavoriteActivity extends AppCompatActivity {
                     public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
 
                         if (favorite) {
-                            IdTeam = DetailFavoriteActivity.this.favorite.getId();
-                            NameTeam = DetailFavoriteActivity.this.favorite.getTeam_name();
-                            YearTeam = DetailFavoriteActivity.this.favorite.getTeam_year();
-                            DescTeam = DetailFavoriteActivity.this.favorite.getTeam_desc();
-                            BadgeTeam = DetailFavoriteActivity.this.favorite.getTeam_badge();
+                            IdTeam = DetailFavoriteActivity.this.favoriteModel.getId();
+                            NameTeam = DetailFavoriteActivity.this.favoriteModel.getTeam_name();
+                            YearTeam = DetailFavoriteActivity.this.favoriteModel.getTeam_year();
+                            DescTeam = DetailFavoriteActivity.this.favoriteModel.getTeam_desc();
+                            BadgeTeam = DetailFavoriteActivity.this.favoriteModel.getTeam_badge();
 
-                            favoriteDbHelper.addFavorite(IdTeam, NameTeam, YearTeam, DescTeam, BadgeTeam);
+                            DBHelper.addFavorite(IdTeam, NameTeam, YearTeam, DescTeam, BadgeTeam);
                             Toast.makeText(DetailFavoriteActivity.this, "Added", Toast.LENGTH_LONG).show();
 
                         } else {
-                            favoriteDbHelper.delFavorite(IdTeam);
+                            DBHelper.delFavorite(IdTeam);
                             Toast.makeText(DetailFavoriteActivity.this, "Removed", Toast.LENGTH_LONG).show();
 
                         }
-
-                        }
-
+                    }
                 }
         );
     }
-
 }

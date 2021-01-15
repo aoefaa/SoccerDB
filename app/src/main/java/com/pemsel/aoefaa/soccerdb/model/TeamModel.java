@@ -1,11 +1,11 @@
-package com.pemsel.aoefaa.soccerdb.data;
+package com.pemsel.aoefaa.soccerdb.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Team implements Parcelable {
+public class TeamModel implements Parcelable {
     @SerializedName("idTeam")
     private int idTeam;
     @SerializedName("strTeam")
@@ -20,10 +20,10 @@ public class Team implements Parcelable {
     private String strTeamBadge;
     private String favStatus;
 
-    public Team() {
+    public TeamModel() {
     }
 
-    public Team(int idTeam, String strTeam, String intFormedYear, String strStadium, String strDescriptionEN, String strTeamBadge, String favStatus) {
+    public TeamModel(int idTeam, String strTeam, String intFormedYear, String strStadium, String strDescriptionEN, String strTeamBadge, String favStatus) {
         this.idTeam = idTeam;
         this.strTeam = strTeam;
         this.intFormedYear = intFormedYear;
@@ -67,7 +67,7 @@ public class Team implements Parcelable {
         dest.writeString(this.strTeamBadge);
     }
 
-    protected Team(Parcel in) {
+    protected TeamModel(Parcel in) {
         this.idTeam = in.readInt();
         this.strTeam = in.readString();
         this.intFormedYear = in.readString();
@@ -75,15 +75,15 @@ public class Team implements Parcelable {
         this.strTeamBadge = in.readString();
     }
 
-    public static final Parcelable.Creator<Team> CREATOR = new Parcelable.Creator<Team>() {
+    public static final Parcelable.Creator<TeamModel> CREATOR = new Parcelable.Creator<TeamModel>() {
         @Override
-        public Team createFromParcel(Parcel source) {
-            return new Team(source);
+        public TeamModel createFromParcel(Parcel source) {
+            return new TeamModel(source);
         }
 
         @Override
-        public Team[] newArray(int size) {
-            return new Team[size];
+        public TeamModel[] newArray(int size) {
+            return new TeamModel[size];
         }
     };
 }

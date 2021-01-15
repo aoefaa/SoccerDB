@@ -3,19 +3,14 @@ package com.pemsel.aoefaa.soccerdb.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-
-import com.pemsel.aoefaa.soccerdb.data.Favorite;
+import com.pemsel.aoefaa.soccerdb.model.FavoriteModel;
 
 import java.util.ArrayList;
 
-public class FavoriteDbHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
 
     private static int DB_VERSION = 1;
     private static String DATABASE_NAME = "TeamDB";
@@ -36,7 +31,7 @@ public class FavoriteDbHelper extends SQLiteOpenHelper {
             ITEM_TEAM_BADGE + " TEXT);";
             //FAVORITE_STATUS + " TEXT)";
 
-    public FavoriteDbHelper(Context context) {
+    public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
     }
 
@@ -80,8 +75,8 @@ public class FavoriteDbHelper extends SQLiteOpenHelper {
     }
 
     // Pilih semua favorite list
-    public ArrayList<Favorite> getFavorite() {
-        ArrayList<Favorite> userModeArrayList = new ArrayList<Favorite>();
+    public ArrayList<FavoriteModel> getFavorite() {
+        ArrayList<FavoriteModel> userModeArrayList = new ArrayList<FavoriteModel>();
 
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -89,14 +84,14 @@ public class FavoriteDbHelper extends SQLiteOpenHelper {
 
         if (c.moveToFirst()) {
             do {
-                Favorite favorite = new Favorite();
-                favorite.setId(c.getInt(c.getColumnIndex(KEY_ID)));
-                favorite.setTeam_name(c.getString(c.getColumnIndex(ITEM_TEAM_NAME)));
-                favorite.setTeam_year(c.getString(c.getColumnIndex(ITEM_TEAM_YEAR)));
-                favorite.setTeam_desc(c.getString(c.getColumnIndex(ITEM_TEAM_DESC)));
-                favorite.setTeam_badge(c.getString(c.getColumnIndex(ITEM_TEAM_BADGE)));
+                FavoriteModel favoriteModel = new FavoriteModel();
+                favoriteModel.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+                favoriteModel.setTeam_name(c.getString(c.getColumnIndex(ITEM_TEAM_NAME)));
+                favoriteModel.setTeam_year(c.getString(c.getColumnIndex(ITEM_TEAM_YEAR)));
+                favoriteModel.setTeam_desc(c.getString(c.getColumnIndex(ITEM_TEAM_DESC)));
+                favoriteModel.setTeam_badge(c.getString(c.getColumnIndex(ITEM_TEAM_BADGE)));
 
-                userModeArrayList.add(favorite);
+                userModeArrayList.add(favoriteModel);
                 } while (c.moveToNext());
             }
         return userModeArrayList;

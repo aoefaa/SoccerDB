@@ -1,6 +1,5 @@
 package com.pemsel.aoefaa.soccerdb.adapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,22 +14,22 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.pemsel.aoefaa.soccerdb.R;
 import com.pemsel.aoefaa.soccerdb.activity.DetailActivity;
-import com.pemsel.aoefaa.soccerdb.data.Team;
+import com.pemsel.aoefaa.soccerdb.model.TeamModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
 
-    private List<Team> items = new ArrayList<>();
+    private List<TeamModel> items = new ArrayList<>();
 
     public interface onSelectData {
-        void onSelected(Team team);
+        void onSelected(TeamModel teamModel);
     }
 
-    public void setData (List<Team> teams){
+    public void setData (List<TeamModel> teamModels){
         this.items.clear();
-        this.items = teams;
+        this.items = teamModels;
         notifyDataSetChanged();
     }
 
@@ -69,10 +68,10 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
 
         }
 
-        public void bind(Team team) {
-            tvNama.setText(team.getStrTeam());
+        public void bind(TeamModel teamModel) {
+            tvNama.setText(teamModel.getStrTeam());
             Glide.with(itemView.getContext())
-                    .load(team.getStrTeamBadge())
+                    .load(teamModel.getStrTeamBadge())
                     .apply(new RequestOptions())
                     .into(imgTeam);
         }

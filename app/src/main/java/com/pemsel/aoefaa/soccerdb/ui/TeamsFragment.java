@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.pemsel.aoefaa.soccerdb.R;
 import com.pemsel.aoefaa.soccerdb.adapter.TeamAdapter;
-import com.pemsel.aoefaa.soccerdb.data.Teams;
+import com.pemsel.aoefaa.soccerdb.model.Teams;
 import com.pemsel.aoefaa.soccerdb.network.ApiClient;
 import com.pemsel.aoefaa.soccerdb.network.ApiInterface;
 
@@ -55,8 +55,8 @@ public class TeamsFragment extends Fragment {
             public void onResponse(Call<Teams> call, Response<Teams> response) {
                 if (response.isSuccessful()) {
                     Teams teams = response.body();
-                    if (teams != null && teams.getTeams() != null) {
-                        adapter.setData(teams.getTeams());
+                    if (teams != null && teams.getTeamModels() != null) {
+                        adapter.setData(teams.getTeamModels());
                     }
                 }
             }
