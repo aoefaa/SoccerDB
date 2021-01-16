@@ -7,6 +7,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class TeamModel implements Parcelable {
+
     @SerializedName("idTeam")
     @Expose
     private int idTeam;

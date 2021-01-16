@@ -18,8 +18,16 @@ public interface ApiInterface {
             @Query("id") String id
     );
 
+
+    // Mencari match
     @GET("eventsnextleague.php")
     Call<MatchResponse> getMatches(
             @Query("id") String id
+    );
+
+    // Team logo
+    @GET("lookupteam.php")
+    Call<TeamResponse> getTeamLogo(
+            @Query("id") String teamId
     );
 }

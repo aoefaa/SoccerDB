@@ -1,9 +1,12 @@
 package com.pemsel.aoefaa.soccerdb.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MatchModel {
+public class MatchModel implements Parcelable {
 
     @SerializedName("idEvent")
     @Expose
@@ -194,6 +197,56 @@ public class MatchModel {
     @SerializedName("strLocked")
     @Expose
     private String strLocked;
+
+    protected MatchModel(Parcel in) {
+        this.idEvent = in.readString();
+        this.idAPIfootball = in.readString();
+        this.strEvent = in.readString();
+        this.strEventAlternate = in.readString();
+        this.strFilename = in.readString();
+        this.strSport = in.readString();
+        this.idLeague = in.readString();
+        this.strLeague = in.readString();
+        this.strSeason = in.readString();
+        this.strDescriptionEN = in.readString();
+        this.strHomeTeam = in.readString();
+        this.strAwayTeam = in.readString();
+        this.intRound = in.readString();
+        this.strOfficial = in.readString();
+        this.strHomeGoalDetails = in.readString();
+        this.strAwayGoalDetails = in.readString();
+        this.strTimestamp = in.readString();
+        this.dateEvent = in.readString();
+        this.dateEventLocal = in.readString();
+        this.strTime = in.readString();
+        this.strTimeLocal = in.readString();
+        this.idHomeTeam = in.readString();
+        this.idAwayTeam = in.readString();
+        this.strResult = in.readString();
+        this.strVenue = in.readString();
+        this.strCountry = in.readString();
+        this.strCity = in.readString();
+        this.strThumb = in.readString();
+        this.strTweet1 = in.readString();
+        this.strTweet2 = in.readString();
+        this.strTweet3 = in.readString();
+        this.strVideo = in.readString();
+        this.strStatus = in.readString();
+        this.strPostponed = in.readString();
+        this.strLocked = in.readString();
+    }
+
+    public static final Creator<MatchModel> CREATOR = new Creator<MatchModel>() {
+        @Override
+        public MatchModel createFromParcel(Parcel in) {
+            return new MatchModel(in);
+        }
+
+        @Override
+        public MatchModel[] newArray(int size) {
+            return new MatchModel[size];
+        }
+    };
 
     public String getIdEvent() {
         return idEvent;
@@ -699,4 +752,47 @@ public class MatchModel {
         this.strLocked = strLocked;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.idEvent);
+        dest.writeString(this.idAPIfootball);
+        dest.writeString(this.strEvent);
+        dest.writeString(this.strEventAlternate);
+        dest.writeString(this.strFilename);
+        dest.writeString(this.strSport);
+        dest.writeString(this.idLeague);
+        dest.writeString(this.strLeague);
+        dest.writeString(this.strSeason);
+        dest.writeString(this.strDescriptionEN);
+        dest.writeString(this.strHomeTeam);
+        dest.writeString(this.strAwayTeam);
+        dest.writeString(this.intRound);
+        dest.writeString(this.strOfficial);
+        dest.writeString(this.strHomeGoalDetails);
+        dest.writeString(this.strAwayGoalDetails);
+        dest.writeString(this.strTimestamp);
+        dest.writeString(this.dateEvent);
+        dest.writeString(this.dateEventLocal);
+        dest.writeString(this.strTime);
+        dest.writeString(this.strTimeLocal);
+        dest.writeString(this.idHomeTeam);
+        dest.writeString(this.idAwayTeam);
+        dest.writeString(this.strResult);
+        dest.writeString(this.strVenue);
+        dest.writeString(this.strCountry);
+        dest.writeString(this.strCity);
+        dest.writeString(this.strThumb);
+        dest.writeString(this.strTweet1);
+        dest.writeString(this.strTweet2);
+        dest.writeString(this.strTweet3);
+        dest.writeString(this.strVideo);
+        dest.writeString(this.strStatus);
+        dest.writeString(this.strPostponed);
+        dest.writeString(this.strLocked);
+    }
 }

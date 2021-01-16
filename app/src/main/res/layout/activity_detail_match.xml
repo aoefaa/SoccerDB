@@ -178,7 +178,7 @@
                     android:layout_marginRight="-40dp"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="Home Team"
+                    android:text="Away Team"
                     android:lineSpacingExtra="5sp"
                     android:gravity="center"
                     android:textSize="16sp"

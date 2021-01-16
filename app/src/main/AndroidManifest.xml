@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MatchDetailActivity"></activity>
         <activity android:name=".activity.TeamDetailActivity" />
-        <activity android:name=".activity.DetailFavoriteActivity" />
+        <activity android:name=".activity.TeamDetailFavoriteActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

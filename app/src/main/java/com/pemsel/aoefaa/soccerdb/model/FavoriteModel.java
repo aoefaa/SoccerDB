@@ -6,12 +6,23 @@ import android.os.Parcelable;
 public class FavoriteModel implements Parcelable {
 
     int id;
-    private String team_name, team_julukan, team_year, team_stadion, team_stadion_kapasitas, team_stadion_alamat, team_desc, team_badge;
+    private String team_name,
+            team_julukan,
+            team_year,
+            team_stadion,
+            team_stadion_kapasitas,
+            team_stadion_alamat,
+            team_desc,
+            team_badge;
 
     public FavoriteModel(Parcel in) {
         id = in.readInt();
         team_name = in.readString();
+        team_julukan = in.readString();
         team_year = in.readString();
+        team_stadion = in.readString();
+        team_stadion_kapasitas = in.readString();
+        team_stadion_alamat = in.readString();
         team_desc = in.readString();
         team_badge = in.readString();
     }
@@ -97,7 +108,11 @@ public class FavoriteModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(team_name);
+        dest.writeString(team_julukan);
         dest.writeString(team_year);
+        dest.writeString(team_stadion);
+        dest.writeString(team_stadion_kapasitas);
+        dest.writeString(team_stadion_alamat);
         dest.writeString(team_desc);
         dest.writeString(team_badge);
     }

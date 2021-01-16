@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.pemsel.aoefaa.soccerdb.R;
-import com.pemsel.aoefaa.soccerdb.activity.DetailFavoriteActivity;
+import com.pemsel.aoefaa.soccerdb.activity.TeamDetailFavoriteActivity;
 import com.pemsel.aoefaa.soccerdb.model.FavoriteModel;
 import com.pemsel.aoefaa.soccerdb.model.TeamModel;
 import com.pemsel.aoefaa.soccerdb.db.DBHelper;
@@ -61,7 +61,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     public void onBindViewHolder(@NonNull FavoriteViewHolder holder, int position) {
         holder.bind(favoriteModelList.get(position));
         holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), DetailFavoriteActivity.class);
+            Intent intent = new Intent(view.getContext(), TeamDetailFavoriteActivity.class);
             intent.putExtra("detail", favoriteModelList.get(position));
             view.getContext().startActivity(intent);
         });
@@ -83,7 +83,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
 
             tvFav = itemView.findViewById(R.id.tvFav);
             ivFav = itemView.findViewById(R.id.ivFav);
-
         }
 
         public void bind(FavoriteModel favoriteModelList) {

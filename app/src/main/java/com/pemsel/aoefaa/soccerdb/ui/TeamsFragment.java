@@ -26,11 +26,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TeamsFragment extends Fragment {
+
     private RecyclerView recyclerView;
-    private TeamAdapter adapter;
+    private TeamAdapter teamAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_teams, container, false);
@@ -40,10 +42,10 @@ public class TeamsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.rvTeams);
-        adapter = new TeamAdapter();
+        teamAdapter = new TeamAdapter();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(teamAdapter);
 
         getDataTeams();
     }
@@ -54,11 +56,11 @@ public class TeamsFragment extends Fragment {
         call.enqueue(new Callback<TeamResponse>() {
 
             @Override
-            public void onResponse(@NotNull Call<TeamResponse> call, @NotNull Response<TeamResponse> response) {
+            public void onResponse(Call<TeamResponse> call, Response<TeamResponse> response) {
                 if (response.isSuccessful()) {
                     TeamResponse teamResponse = response.body();
                     if (teamResponse != null && teamResponse.getTeamModels() != null) {
-                        adapter.setData(teamResponse.getTeamModels());
+                        teamAdapter.setData(teamResponse.getTeamModels());
                     }
                 }
             }

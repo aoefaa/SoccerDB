@@ -16,22 +16,20 @@ import com.pemsel.aoefaa.soccerdb.R;
 import com.pemsel.aoefaa.soccerdb.activity.TeamDetailActivity;
 import com.pemsel.aoefaa.soccerdb.model.TeamModel;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
 
-    private List<TeamModel> items = new ArrayList<>();
+    private List<TeamModel> teamModels = new ArrayList<>();
 
     public void setData (List<TeamModel> teamModels){
-        this.items.clear();
-        this.items = teamModels;
+        this.teamModels.clear();
+        this.teamModels = teamModels;
         notifyDataSetChanged();
     }
 
-    @NotNull
+    @NonNull
     @Override
     public TeamAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater
@@ -42,17 +40,17 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull TeamAdapter.ViewHolder holder, int position) {
-        holder.bind(items.get(position));
+        holder.bind(teamModels.get(position));
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), TeamDetailActivity.class);
-            intent.putExtra("detail", items.get(position));
+            intent.putExtra("detail", teamModels.get(position));
             view.getContext().startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return teamModels.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,7 +62,6 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
             super(itemView);
             imgTeam = itemView.findViewById(R.id.iv_team);
             tvNama = itemView.findViewById(R.id.tv_team);
-
         }
 
         public void bind(TeamModel teamModel) {

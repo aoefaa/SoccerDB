@@ -18,7 +18,7 @@ import com.pemsel.aoefaa.soccerdb.db.DBHelper;
 
 import java.util.ArrayList;
 
-public class DetailFavoriteActivity extends AppCompatActivity {
+public class TeamDetailFavoriteActivity extends AppCompatActivity {
     private DBHelper DBHelper;
     private FavoriteModel favoriteModel = new FavoriteModel();
     private TeamModel teamModel = new TeamModel();
@@ -70,9 +70,12 @@ public class DetailFavoriteActivity extends AppCompatActivity {
             StadionAlamatTeam = favoriteModel.getTeam_stadion_alamat();
             DescTeam = favoriteModel.getTeam_desc();
 
-
             tvNama.setText(NameTeam);
+            tvJulukan.setText(JulukanTeam);
             tvTahun.setText(YearTeam);
+            tvNamaStadion.setText(StadionTeam);
+            tvKapasitasStadion.setText(StadionKapasitasTeam);
+            tvAlamatStadion.setText(StadionAlamatTeam);
             tvDeskripsi.setText(DescTeam);
 
             Glide.with(getApplicationContext())
@@ -93,22 +96,22 @@ public class DetailFavoriteActivity extends AppCompatActivity {
                     public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
 
                         if (favorite) {
-                            IdTeam = DetailFavoriteActivity.this.favoriteModel.getId();
-                            NameTeam = DetailFavoriteActivity.this.favoriteModel.getTeam_name();
-                            JulukanTeam = DetailFavoriteActivity.this.favoriteModel.getTeam_julukan();
-                            YearTeam = DetailFavoriteActivity.this.favoriteModel.getTeam_year();
-                            StadionTeam = DetailFavoriteActivity.this.favoriteModel.getTeam_stadion();
-                            StadionKapasitasTeam = DetailFavoriteActivity.this.favoriteModel.getTeam_stadion_kapasitas();
-                            StadionAlamatTeam = DetailFavoriteActivity.this.favoriteModel.getTeam_stadion_alamat();
-                            DescTeam = DetailFavoriteActivity.this.favoriteModel.getTeam_desc();
-                            BadgeTeam = DetailFavoriteActivity.this.favoriteModel.getTeam_badge();
+                            IdTeam = TeamDetailFavoriteActivity.this.favoriteModel.getId();
+                            NameTeam = TeamDetailFavoriteActivity.this.favoriteModel.getTeam_name();
+                            JulukanTeam = TeamDetailFavoriteActivity.this.favoriteModel.getTeam_julukan();
+                            YearTeam = TeamDetailFavoriteActivity.this.favoriteModel.getTeam_year();
+                            StadionTeam = TeamDetailFavoriteActivity.this.favoriteModel.getTeam_stadion();
+                            StadionKapasitasTeam = TeamDetailFavoriteActivity.this.favoriteModel.getTeam_stadion_kapasitas();
+                            StadionAlamatTeam = TeamDetailFavoriteActivity.this.favoriteModel.getTeam_stadion_alamat();
+                            DescTeam = TeamDetailFavoriteActivity.this.favoriteModel.getTeam_desc();
+                            BadgeTeam = TeamDetailFavoriteActivity.this.favoriteModel.getTeam_badge();
 
                             DBHelper.addFavorite(IdTeam, NameTeam, JulukanTeam, YearTeam, StadionTeam, StadionKapasitasTeam, StadionAlamatTeam, DescTeam, BadgeTeam);
-                            Toast.makeText(DetailFavoriteActivity.this, "Ditambahkan", Toast.LENGTH_LONG).show();
+                            Toast.makeText(TeamDetailFavoriteActivity.this, "Ditambahkan", Toast.LENGTH_LONG).show();
 
                         } else {
                             DBHelper.delFavorite(IdTeam);
-                            Toast.makeText(DetailFavoriteActivity.this, "Dihapus", Toast.LENGTH_LONG).show();
+                            Toast.makeText(TeamDetailFavoriteActivity.this, "Dihapus", Toast.LENGTH_LONG).show();
 
                         }
                     }
