@@ -28,11 +28,13 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MatchesFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private MatchAdapter matchAdapter;
+    ApiInterface apiInterface;
 
     List<MatchModel> matchModels = new ArrayList<>();
 
@@ -48,7 +50,10 @@ public class MatchesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.rv_matches);
-        matchAdapter = new MatchAdapter();
+
+        apiInterface = ApiClient.getRetrofitInstance().create(ApiInterface.class);
+
+        matchAdapter = new MatchAdapter(getContext(), apiInterface);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(matchAdapter);
@@ -67,7 +72,6 @@ public class MatchesFragment extends Fragment {
                     MatchResponse matchResponse = response.body();
                     if (matchResponse != null && matchResponse.getMatchModels() != null) {
                         matchAdapter.setMatches(matchResponse.getMatchModels());
-                        Toast.makeText(getActivity().getApplicationContext(), "Connected", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

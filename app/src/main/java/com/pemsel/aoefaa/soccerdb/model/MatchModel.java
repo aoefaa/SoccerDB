@@ -198,6 +198,10 @@ public class MatchModel implements Parcelable {
     @Expose
     private String strLocked;
 
+    public MatchModel() {
+
+    }
+
     protected MatchModel(Parcel in) {
         this.idEvent = in.readString();
         this.idAPIfootball = in.readString();

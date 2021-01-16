@@ -28,6 +28,12 @@ public interface ApiInterface {
     // Team logo
     @GET("lookupteam.php")
     Call<TeamResponse> getTeamLogo(
-            @Query("id") String teamId
+            @Query("id") String id
+    );
+
+    //Match Detail
+    @GET("lookupevent.php")
+    Call<MatchResponse> getMatchDetail(
+            @Query("id") String id
     );
 }
