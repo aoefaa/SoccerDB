@@ -17,19 +17,26 @@ public class DBHelper extends SQLiteOpenHelper {
     private static String TABLE_NAME = "favoriteTable";
     public static String KEY_ID = "id";
     public static String ITEM_TEAM_NAME = "teamName";
+    public static String ITEM_TEAM_JULUKAN = "teamJulukan";
+    public static String ITEM_TEAM_STADION = "teamStadion";
+    public static String ITEM_TEAM_STADION_KAPASITAS = "teamJulukanKapasitas";
+    public static String ITEM_TEAM_STADION_ALAMAT = "teamJulukanAlamat";
     public static String ITEM_TEAM_YEAR = "teamYear";
     public static String ITEM_TEAM_DESC = "teamDesc";
     public static String ITEM_TEAM_BADGE = "teamBadge";
-    //public static String FAVORITE_STATUS = "favStatus";
+
 
     private static String CREATE_TABLE = "CREATE TABLE " +
             TABLE_NAME + "(" +
             KEY_ID + " TEXT," +
             ITEM_TEAM_NAME + " TEXT," +
+            ITEM_TEAM_JULUKAN + " TEXT," +
             ITEM_TEAM_YEAR + " TEXT," +
+            ITEM_TEAM_STADION + " TEXT," +
+            ITEM_TEAM_STADION_KAPASITAS + " TEXT," +
+            ITEM_TEAM_STADION_ALAMAT + " TEXT," +
             ITEM_TEAM_DESC + " TEXT," +
             ITEM_TEAM_BADGE + " TEXT);";
-            //FAVORITE_STATUS + " TEXT)";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
@@ -49,7 +56,11 @@ public class DBHelper extends SQLiteOpenHelper {
     // Masukkan data ke database
     public long addFavorite(int id,
                             String team_name,
+                            String team_julukan,
                             String team_year,
+                            String team_stadion,
+                            String team_stadion_kapasitas,
+                            String team_stadion_alamat,
                             String team_desc,
                             String team_badge) {
         SQLiteDatabase db;
@@ -57,7 +68,11 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(KEY_ID, id);
         cv.put(ITEM_TEAM_NAME, team_name);
+        cv.put(ITEM_TEAM_JULUKAN, team_julukan);
         cv.put(ITEM_TEAM_YEAR, team_year);
+        cv.put(ITEM_TEAM_STADION, team_stadion);
+        cv.put(ITEM_TEAM_STADION_KAPASITAS, team_stadion_kapasitas);
+        cv.put(ITEM_TEAM_STADION_ALAMAT, team_stadion_alamat);
         cv.put(ITEM_TEAM_DESC, team_desc);
         cv.put(ITEM_TEAM_BADGE, team_badge);
 
@@ -87,7 +102,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 FavoriteModel favoriteModel = new FavoriteModel();
                 favoriteModel.setId(c.getInt(c.getColumnIndex(KEY_ID)));
                 favoriteModel.setTeam_name(c.getString(c.getColumnIndex(ITEM_TEAM_NAME)));
+                favoriteModel.setTeam_julukan(c.getString(c.getColumnIndex(ITEM_TEAM_JULUKAN)));
                 favoriteModel.setTeam_year(c.getString(c.getColumnIndex(ITEM_TEAM_YEAR)));
+                favoriteModel.setTeam_stadion(c.getString(c.getColumnIndex(ITEM_TEAM_STADION)));
+                favoriteModel.setTeam_stadion_kapasitas(c.getString(c.getColumnIndex(ITEM_TEAM_STADION_KAPASITAS)));
+                favoriteModel.setTeam_stadion_alamat(c.getString(c.getColumnIndex(ITEM_TEAM_STADION_ALAMAT)));
                 favoriteModel.setTeam_desc(c.getString(c.getColumnIndex(ITEM_TEAM_DESC)));
                 favoriteModel.setTeam_badge(c.getString(c.getColumnIndex(ITEM_TEAM_BADGE)));
 

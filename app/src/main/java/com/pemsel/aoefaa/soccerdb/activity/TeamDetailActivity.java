@@ -14,7 +14,7 @@ import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 import com.pemsel.aoefaa.soccerdb.R;
 import com.pemsel.aoefaa.soccerdb.adapter.FavoriteAdapter;
 import com.pemsel.aoefaa.soccerdb.model.FavoriteModel;
-import com.pemsel.aoefaa.soccerdb.model.Teams;
+import com.pemsel.aoefaa.soccerdb.model.TeamResponse;
 import com.pemsel.aoefaa.soccerdb.model.TeamModel;
 import com.pemsel.aoefaa.soccerdb.db.DBHelper;
 import com.pemsel.aoefaa.soccerdb.network.ApiClient;
@@ -26,48 +26,66 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailActivity extends AppCompatActivity {
+public class TeamDetailActivity extends AppCompatActivity {
     private DBHelper DBHelper;
     private TeamModel teamModel = new TeamModel();
     private boolean isFavorite = false;
     private FavoriteAdapter favoriteAdapter;
-    private ArrayList<FavoriteModel> favoriteModelList;
     private FavoriteModel favoriteModel = new FavoriteModel();
     ProgressBar progressBar;
+
+    //Bring to Favorite
     int IdTeam;
     String NameTeam;
+    String JulukanTeam;
     String YearTeam;
+    String StadionNameTeam;
+    String KapasitasStadionTeam;
+    String AlamatStadionTeam;
     String DescTeam;
     String BadgeTeam;
+    private ArrayList<FavoriteModel> favoriteModelList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_detail_team);
 
         DBHelper = new DBHelper(this);
         favoriteModelList = DBHelper.getFavorite();
 
-        TextView tvNama = findViewById(R.id.tvNama);
-        TextView tvTahun = findViewById(R.id.tvTahun);
-        TextView tvDeskripsi = findViewById(R.id.tvDeskripsi);
-        ImageView imgTeam = findViewById(R.id.imgTeam);
-        MaterialFavoriteButton btFav = findViewById(R.id.btFav);
+        //TextView
+        TextView tvNama = findViewById(R.id.tv_nama_team);
+        TextView tvTahun = findViewById(R.id.tv_tahun_team);
+        TextView tvDeskripsi = findViewById(R.id.tv_deskripsi_team);
+        TextView tvJulukan = findViewById(R.id.tv_julukan_team);
+        TextView tvNamaStadion = findViewById(R.id.tv_stadion);
+        TextView tvKapasitasStadion = findViewById(R.id.tv_kapasitas_stadion);
+        TextView tvAlamatStadion = findViewById(R.id.tv_alamat_stadion);
+        //ImageView
+        ImageView imgTeam = findViewById(R.id.iv_team);
+        //Button
+        MaterialFavoriteButton btFav = findViewById(R.id.bt_favorite);
 
         teamModel = getIntent().getParcelableExtra("detail");
 
         ApiInterface service = ApiClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<Teams> call = service.getTeamDetail(String.valueOf(teamModel.getIdTeam()));
-        call.enqueue(new Callback<Teams>() {
+        Call<TeamResponse> call = service.getTeamDetail(String.valueOf(teamModel.getIdTeam()));
+        call.enqueue(new Callback<TeamResponse>() {
             @Override
-            public void onResponse(Call<Teams> call, Response<Teams> response) {
+            public void onResponse(Call<TeamResponse> call, Response<TeamResponse> response) {
                 if (response.isSuccessful()) {
-                    Teams teams = response.body();
-                    if (teams != null && teams.getTeamModels() != null) {
-                        teamModel = teams.getTeamModels().get(0);
+                    TeamResponse teamResponse = response.body();
+                    if (teamResponse != null && teamResponse.getTeamModels() != null) {
+                        teamModel = teamResponse.getTeamModels().get(0);
                         tvNama.setText(teamModel.getStrTeam());
-                        tvDeskripsi.setText(teamModel.getStrDescriptionEN());
+                        tvJulukan.setText(teamModel.getStrKeywords());
                         tvTahun.setText(teamModel.getIntFormedYear());
+                        tvNamaStadion.setText(teamModel.getStrStadium());
+                        tvKapasitasStadion.setText(teamModel.getIntStadiumCapacity());
+                        tvAlamatStadion.setText(teamModel.getStrStadiumLocation());
+                        tvDeskripsi.setText(teamModel.getStrDescriptionEN());
+
                         Glide.with(getApplicationContext())
                                 .load(teamModel.getStrTeamBadge())
                                 .apply(new RequestOptions())
@@ -83,7 +101,7 @@ public class DetailActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Teams> call, Throwable t) {
+            public void onFailure(Call<TeamResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
             }
@@ -97,15 +115,19 @@ public class DetailActivity extends AppCompatActivity {
                         if (favorite) {
                             IdTeam = teamModel.getIdTeam();
                             NameTeam = teamModel.getStrTeam();
+                            JulukanTeam = teamModel.getStrKeywords();
+                            StadionNameTeam = teamModel.getStrStadium();
+                            KapasitasStadionTeam = teamModel.getIntStadiumCapacity();
+                            AlamatStadionTeam = teamModel.getStrStadiumLocation();
                             YearTeam = teamModel.getIntFormedYear();
                             DescTeam = teamModel.getStrDescriptionEN();
                             BadgeTeam = teamModel.getStrTeamBadge();
 
-                            DBHelper.addFavorite(IdTeam, NameTeam, YearTeam, DescTeam, BadgeTeam);
-                            Toast.makeText(DetailActivity.this, "Added", Toast.LENGTH_LONG).show();
+                            DBHelper.addFavorite(IdTeam, NameTeam, JulukanTeam, YearTeam, StadionNameTeam, KapasitasStadionTeam, AlamatStadionTeam, DescTeam, BadgeTeam);
+                            Toast.makeText(TeamDetailActivity.this, "Ditambahkan", Toast.LENGTH_LONG).show();
                         } else {
                             DBHelper.delFavorite(IdTeam);
-                            Toast.makeText(DetailActivity.this, "Removed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(TeamDetailActivity.this, "Dihapus", Toast.LENGTH_LONG).show();
                         }
                     }
                 }

@@ -15,9 +15,11 @@ import android.widget.Toast;
 
 import com.pemsel.aoefaa.soccerdb.R;
 import com.pemsel.aoefaa.soccerdb.adapter.TeamAdapter;
-import com.pemsel.aoefaa.soccerdb.model.Teams;
+import com.pemsel.aoefaa.soccerdb.model.TeamResponse;
 import com.pemsel.aoefaa.soccerdb.network.ApiClient;
 import com.pemsel.aoefaa.soccerdb.network.ApiInterface;
+
+import org.jetbrains.annotations.NotNull;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,21 +50,21 @@ public class TeamsFragment extends Fragment {
 
     private void getDataTeams() {
         ApiInterface service = ApiClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<Teams> call = service.getTeams("4790");
-        call.enqueue(new Callback<Teams>() {
+        Call<TeamResponse> call = service.getTeams("4790");
+        call.enqueue(new Callback<TeamResponse>() {
 
             @Override
-            public void onResponse(Call<Teams> call, Response<Teams> response) {
+            public void onResponse(@NotNull Call<TeamResponse> call, @NotNull Response<TeamResponse> response) {
                 if (response.isSuccessful()) {
-                    Teams teams = response.body();
-                    if (teams != null && teams.getTeamModels() != null) {
-                        adapter.setData(teams.getTeamModels());
+                    TeamResponse teamResponse = response.body();
+                    if (teamResponse != null && teamResponse.getTeamModels() != null) {
+                        adapter.setData(teamResponse.getTeamModels());
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<Teams> call, Throwable t) {
+            public void onFailure(@NotNull Call<TeamResponse> call, @NotNull Throwable t) {
                 Toast.makeText(getActivity().getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
             }
 

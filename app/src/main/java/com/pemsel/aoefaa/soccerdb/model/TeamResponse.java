@@ -4,14 +4,14 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Teams {
-    @SerializedName("teamModels")
+public class TeamResponse {
+    @SerializedName("teams")
     private List<TeamModel> teamModels;
 
-    public Teams() {
+    public TeamResponse() {
     }
 
-    public Teams(List<TeamModel> teamModels) {
+    public TeamResponse(List<TeamModel> teamModels) {
         this.teamModels = teamModels;
     }
 

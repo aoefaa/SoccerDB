@@ -6,7 +6,7 @@ import android.os.Parcelable;
 public class FavoriteModel implements Parcelable {
 
     int id;
-    private String team_name, team_year, team_desc, team_badge;
+    private String team_name, team_julukan, team_year, team_stadion, team_stadion_kapasitas, team_stadion_alamat, team_desc, team_badge;
 
     public FavoriteModel(Parcel in) {
         id = in.readInt();
@@ -30,6 +30,38 @@ public class FavoriteModel implements Parcelable {
 
     public FavoriteModel() {
 
+    }
+
+    public String getTeam_julukan() {
+        return team_julukan;
+    }
+
+    public void setTeam_julukan(String team_julukan) {
+        this.team_julukan = team_julukan;
+    }
+
+    public String getTeam_stadion() {
+        return team_stadion;
+    }
+
+    public void setTeam_stadion(String team_stadion) {
+        this.team_stadion = team_stadion;
+    }
+
+    public String getTeam_stadion_kapasitas() {
+        return team_stadion_kapasitas;
+    }
+
+    public void setTeam_stadion_kapasitas(String team_stadion_kapasitas) {
+        this.team_stadion_kapasitas = team_stadion_kapasitas;
+    }
+
+    public String getTeam_stadion_alamat() {
+        return team_stadion_alamat;
+    }
+
+    public void setTeam_stadion_alamat(String team_stadion_alamat) {
+        this.team_stadion_alamat = team_stadion_alamat;
     }
 
     public int getId() {

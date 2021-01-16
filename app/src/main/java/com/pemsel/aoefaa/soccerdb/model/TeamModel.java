@@ -3,34 +3,105 @@ package com.pemsel.aoefaa.soccerdb.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class TeamModel implements Parcelable {
     @SerializedName("idTeam")
+    @Expose
     private int idTeam;
     @SerializedName("strTeam")
+    @Expose
     private String strTeam;
     @SerializedName("intFormedYear")
-    private String  intFormedYear;
+    @Expose
+    private String intFormedYear;
     @SerializedName("strStadium")
+    @Expose
     private String strStadium;
+    @SerializedName("strKeywords")
+    @Expose
+    private String strKeywords;
+    @SerializedName("strStadiumLocation")
+    @Expose
+    private String strStadiumLocation;
+    @SerializedName("intStadiumCapacity")
+    @Expose
+    private String intStadiumCapacity;
+    @SerializedName("strWebsite")
+    @Expose
+    private String strWebsite;
+    @SerializedName("strFacebook")
+    @Expose
+    private String strFacebook;
+    @SerializedName("strTwitter")
+    @Expose
+    private String strTwitter;
+    @SerializedName("strInstagram")
+    @Expose
+    private String strInstagram;
     @SerializedName("strDescriptionEN")
+    @Expose
     private String strDescriptionEN;
+
+    @SerializedName("strGender")
+    @Expose
+    private String strGender;
+    @SerializedName("strCountry")
+    @Expose
+    private String strCountry;
     @SerializedName("strTeamBadge")
+    @Expose
     private String strTeamBadge;
-    private String favStatus;
+    @SerializedName("strYoutube")
+    @Expose
+    private String strYoutube;
 
     public TeamModel() {
     }
 
-    public TeamModel(int idTeam, String strTeam, String intFormedYear, String strStadium, String strDescriptionEN, String strTeamBadge, String favStatus) {
-        this.idTeam = idTeam;
-        this.strTeam = strTeam;
-        this.intFormedYear = intFormedYear;
-        this.strStadium = strStadium;
-        this.strDescriptionEN = strDescriptionEN;
-        this.strTeamBadge = strTeamBadge;
-        this.favStatus = favStatus;
+    public String getStrStadium() {
+        return strStadium;
+    }
+
+    public String getStrKeywords() {
+        return strKeywords;
+    }
+
+    public String getStrStadiumLocation() {
+        return strStadiumLocation;
+    }
+
+    public String getIntStadiumCapacity() {
+        return intStadiumCapacity;
+    }
+
+    public String getStrWebsite() {
+        return strWebsite;
+    }
+
+    public String getStrFacebook() {
+        return strFacebook;
+    }
+
+    public String getStrTwitter() {
+        return strTwitter;
+    }
+
+    public String getStrInstagram() {
+        return strInstagram;
+    }
+
+    public String getStrGender() {
+        return strGender;
+    }
+
+    public String getStrCountry() {
+        return strCountry;
+    }
+
+    public String getStrYoutube() {
+        return strYoutube;
     }
 
     public int getIdTeam() {

@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lihat aktifitas tim yang kamu suka hari ini "
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:fontFamily="@font/inter_regular"
                 android:textColor="@color/white"/>
 
@@ -62,28 +62,30 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="10dp">
+                app:cardElevation="5dp">
 
                 <ImageView
+                    android:id="@+id/iv_league"
                     android:layout_width="110dp"
                     android:layout_height="110dp"
                     android:scaleType="centerInside"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/league_logo"/>
 
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvTeams"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/item_teams"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTeams"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/item_teams"/>
 
         </LinearLayout>
 

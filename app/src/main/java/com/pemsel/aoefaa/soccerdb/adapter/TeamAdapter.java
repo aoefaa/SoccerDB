@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.pemsel.aoefaa.soccerdb.R;
-import com.pemsel.aoefaa.soccerdb.activity.DetailActivity;
+import com.pemsel.aoefaa.soccerdb.activity.TeamDetailActivity;
 import com.pemsel.aoefaa.soccerdb.model.TeamModel;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +25,13 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
 
     private List<TeamModel> items = new ArrayList<>();
 
-    public interface onSelectData {
-        void onSelected(TeamModel teamModel);
-    }
-
     public void setData (List<TeamModel> teamModels){
         this.items.clear();
         this.items = teamModels;
         notifyDataSetChanged();
     }
 
+    @NotNull
     @Override
     public TeamAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater
@@ -45,7 +44,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull TeamAdapter.ViewHolder holder, int position) {
         holder.bind(items.get(position));
         holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), DetailActivity.class);
+            Intent intent = new Intent(view.getContext(), TeamDetailActivity.class);
             intent.putExtra("detail", items.get(position));
             view.getContext().startActivity(intent);
         });
@@ -56,15 +55,15 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imgTeam;
-        private TextView tvNama;
+        ImageView imgTeam;
+        TextView tvNama;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgTeam = itemView.findViewById(R.id.imgTeam);
-            tvNama = itemView.findViewById(R.id.tvNama);
+            imgTeam = itemView.findViewById(R.id.iv_team);
+            tvNama = itemView.findViewById(R.id.tv_team);
 
         }
 

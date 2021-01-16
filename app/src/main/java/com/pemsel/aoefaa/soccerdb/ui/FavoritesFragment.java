@@ -41,7 +41,7 @@ public class FavoritesFragment extends Fragment{
     public void onViewCreated(@NonNull View view,
                               @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = view.findViewById(R.id.rvFav);
+        recyclerView = view.findViewById(R.id.rv_fav);
         favoriteAdapter = new FavoriteAdapter(getActivity());
         DBHelper = new DBHelper(getContext());
 

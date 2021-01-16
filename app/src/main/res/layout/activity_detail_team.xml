@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.TeamDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_2_radius"
+            app:elevation="0dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_profile"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <com.github.ivbaranov.mfb.MaterialFavoriteButton
+                    android:id="@+id/bt_favorite"
+                    app:mfb_size="50"
+                    android:tint="#ff0000"
+                    app:mfb_type="heart"
+                    android:layout_height="70dp"
+                    android:layout_width="70dp"
+                    android:layout_marginLeft="330dp"/>
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:background="@drawable/home_2_radius"
+                android:elevation="0dp"/>
+
+            <!--<com.google.android.material.tabs.TabLayout
+                android:id="@+id/tablayout_profile"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/home_2_radius"
+                app:tabIndicator="@color/utama_2"
+                app:tabTextColor="@color/white"
+                app:tabRippleColor="@color/utama_2">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:text="Detail" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:text="Match" />
+
+            </com.google.android.material.tabs.TabLayout>-->
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_marginTop="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_team"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:scaleType="centerInside"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_image"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_nama_team"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="NAMA TEAM"
+                android:gravity="center_vertical|center_horizontal"
+                android:fontFamily="@font/inter_bold"
+                android:textSize="18sp"
+                android:lineSpacingExtra="5sp"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="180dp"
+                        android:layout_height="100dp"
+                        android:gravity="center">
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/small_round"
+                            android:layout_width="150dp"
+                            android:layout_height="80dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/detail_title"
+                                    android:text="Julukan :" />
+
+                                <TextView
+                                    android:id="@+id/tv_julukan_team"
+                                    style="@style/detail_body"
+                                    android:text="Julukan Team" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="180dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity=""
+                        android:gravity="center">
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/small_round"
+                            android:layout_width="150dp"
+                            android:layout_height="80dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/detail_title"
+                                    android:text="Tahun Didirikan :" />
+
+                                <TextView
+                                    android:id="@+id/tv_tahun_team"
+                                    style="@style/detail_body"
+                                    android:text="Tahun Didirikan Team" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="155dp"
+                    android:gravity="center">
+
+                    <androidx.cardview.widget.CardView
+                        style="@style/small_round"
+                        android:layout_width="330dp"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/detail_title"
+                                android:text="Nama Stadion :" />
+
+                            <TextView
+                                android:id="@+id/tv_stadion"
+                                style="@style/detail_body_2"
+                                android:text="Nama Stadion" />
+
+                            <TextView
+                                style="@style/detail_title"
+                                android:text="Kapasitas Stadion :" />
+
+                            <TextView
+                                android:id="@+id/tv_kapasitas_stadion"
+                                style="@style/detail_body_2"
+                                android:text="Kapasitas Stadion" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="15dp"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
+                                    android:layout_marginLeft="15dp" />
+
+                                <TextView
+                                    android:id="@+id/tv_alamat_stadion"
+                                    style="@style/detail_body_2"
+                                    android:layout_marginTop="0dp"
+                                    android:text="Alamat Stadion" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <androidx.cardview.widget.CardView
+                        style="@style/small_round"
+                        android:layout_width="330dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/detail_title"
+                                android:text="Profil" />
+
+                            <TextView
+                                android:id="@+id/tv_deskripsi_team"
+                                style="@style/detail_body"
+                                android:text="Profil Team" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/bt_youtube"
+                            style="@style/small_round"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_youtube"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/bt_twitter"
+                            style="@style/small_round"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_twitter"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/bt_website"
+                            style="@style/small_round"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_website"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/bt_instagram"
+                            style="@style/small_round"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_instagram"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>
